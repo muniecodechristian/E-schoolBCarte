@@ -1,0 +1,84 @@
+<!doctype html>
+<html
+  lang="fr"
+  className="
+    min-h-screen
+    bg-white
+    text-slate-900
+    dark:bg-[#09090B]
+    dark:text-slate-100
+    transition-colors
+    duration-300
+  "
+>
+  <head>
+    <meta charset="UTF-8" />
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+
+  <style>
+
+    @theme {
+  --grid-light: rgba(15, 23, 42, 0.05);
+  --grid-dark: rgba(255, 255, 255, 0.05);
+}
+
+html {
+  background-color: white;
+  background-image:
+    linear-gradient(var(--grid-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-light) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.dark html {
+  background-color: #09090b;
+  background-image:
+    linear-gradient(var(--grid-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-dark) 1px, transparent 1px);
+}
+
+
+
+
+
+      :root {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background: radial-gradient(
+      circle at center,
+       rgba(59, 130, 246, 0.08),
+      transparent 45%
+    ),
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 50%),
+    #070a10;;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+  </style>
+ <body
+  className="
+    min-h-screen
+    bg-slate-50 
+    dark:bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.12),transparent_45%)]
+  "
+>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
