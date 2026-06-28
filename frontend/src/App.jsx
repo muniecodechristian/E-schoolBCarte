@@ -1,44 +1,18 @@
-import {
-  SidebarProvider,
-  SidebarTrigger,
-  SidebarInset,
-} from "@/components/ui/sidebar";
-import { AppSidebar } from "./components/layout/AppSidebar";
-import Admin from "./PAGES/Admin";
-import { HeroSection } from "./components/blocks/hero-section-1";
+
+
+
+
+
+
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./Dashboard";
 import Home from "./pages/Home";
 
-
-
-export default function Dashboard() {
-
-
-  const user =null; // Replace with your user authentication logic
-
-  if (!user) return <Home />;
+export default function App() {
   return (
-    <SidebarProvider>
-
-      <AppSidebar />
-
-      <SidebarInset>
-
-        <header className="h-16 flex items-center px-6 border-b">
-          <SidebarTrigger />
-        </header>
-
-        <main className="p-6">
-          test
-          
-        </main>
-
-      </SidebarInset>
-
-
-
-
-      <HeroSection/>
-
-    </SidebarProvider>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
