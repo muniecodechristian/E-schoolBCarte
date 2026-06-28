@@ -1,84 +1,88 @@
 <!doctype html>
-<html
-  lang="fr"
-  className="
-    min-h-screen
-    bg-white
-    text-slate-900
-    dark:bg-[#09090B]
-    dark:text-slate-100
-    transition-colors
-    duration-300
-  "
->
-  <head>
-    <meta charset="UTF-8" />
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>E-SchoolB - Carte d'élèves numérique</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <style>
+    /* =======================
+       BASE THEME
+    ======================= */
+    :root {
+      font-family: 'Montserrat', sans-serif;
+      color-scheme: light dark;
+    }
 
-    @theme {
-  --grid-light: rgba(15, 23, 42, 0.05);
-  --grid-dark: rgba(255, 255, 255, 0.05);
-}
+    /* =======================
+       LIGHT BACKGROUND
+    ======================= */
+    html {
+      background-color: #ffffff;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
 
-html {
-  background-color: white;
-  background-image:
-    linear-gradient(var(--grid-light) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-light) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
+    /* =======================
+       DARK BACKGROUND
+    ======================= */
+    html.dark {
+      background-color: #09090b;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 
-.dark html {
-  background-color: #09090b;
-  background-image:
-    linear-gradient(var(--grid-dark) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-dark) 1px, transparent 1px);
-}
+      background-size: 48px 48px;
+    }
 
+    /* =======================
+       RADIAL GLOW (SUBTLE)
+    ======================= */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(
+          circle at top,
+          rgba(56, 189, 248, 0.10),
+          transparent 45%
+        );
+      transition: background 0.4s ease;
+    }
 
+    html.dark body {
+      background: radial-gradient(
+          circle at top,
+          rgba(99, 102, 241, 0.12),
+          transparent 45%
+        );
+    }
 
-
-
-      :root {
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: radial-gradient(
-      circle at center,
-       rgba(59, 130, 246, 0.08),
-      transparent 45%
-    ),
-    radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 50%),
-    #070a10;;
-
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-
-
-
+    /* =======================
+       ANTI BLUR / SMOOTH TEXT
+    ======================= */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
   </style>
- <body
-  className="
-    min-h-screen
-    bg-slate-50 
-    dark:bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.12),transparent_45%)]
-  "
->
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

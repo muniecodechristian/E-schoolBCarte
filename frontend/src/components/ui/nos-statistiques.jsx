@@ -71,11 +71,11 @@ function StatCard({ stat, trigger }) {
 export default function NosStatistiques() {
   const ref = useRef(null);
 
-  // 🔥 déclenchement scroll (UNE SEULE FOIS)
+  //  déclenchement scroll (UNE SEULE FOIS)
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 px-6 bg-neutral-50 dark:bg-neutral-950">
+    <section ref={ref} className="py-24 px-6 ">
       {/* HEADER */}
       <div className="text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">

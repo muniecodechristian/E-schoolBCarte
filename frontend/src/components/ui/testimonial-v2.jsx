@@ -134,7 +134,7 @@ function TestimonialsSection() {
   const thirdColumn = testimonials.slice(6, 9);
 
   return (
-    <section className="py-24 bg-neutral-50 dark:bg-neutral-950">
+  <section className="relative py-24 overflow-hidden">
 
       {/* HEADER */}
       <div className="text-center mb-16 max-w-2xl mx-auto">
