@@ -46,7 +46,7 @@ export function AppSidebar() {
       <SidebarContent>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Administration</SidebarGroupLabel>
+      
 
           <SidebarGroupContent>
             <SidebarMenu>

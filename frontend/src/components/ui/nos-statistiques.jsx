@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useInView, motion } from "framer-motion";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { School, Users, CheckCircle, Clock, Award } from "lucide-react";
 
 const stats = [
@@ -13,35 +13,38 @@ const stats = [
   { label: "Temps génération", value: 5, icon: Award, suffix: " sec" },
 ];
 
-// 🔥 Counter hook ultra smooth
 function useCounter(end, start) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!start) return;
 
-    let startValue = 0;
+    let animationFrame;
     const duration = 1200;
-    const increment = end / (duration / 16);
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      startValue += increment;
+    const animate = (time) => {
+      const progress = Math.min((time - startTime) / duration, 1);
 
-      if (startValue >= end) {
-        startValue = end;
-        clearInterval(timer);
+      // animation fluide
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      setCount(Math.round(end * eased));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
       }
+    };
 
-      setCount(Math.floor(startValue));
-    }, 16);
+    animationFrame = requestAnimationFrame(animate);
 
-    return () => clearInterval(timer);
+    return () => cancelAnimationFrame(animationFrame);
   }, [end, start]);
 
   return count;
 }
 
-function StatCard({ stat, trigger }) {
+const StatCard = memo(function StatCard({ stat, trigger }) {
   const count = useCounter(stat.value, trigger);
   const Icon = stat.icon;
 
@@ -49,47 +52,56 @@ function StatCard({ stat, trigger }) {
     <motion.div
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 shadow-sm hover:shadow-lg transition"
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.45 }}
+      className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300"
     >
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-900">
           <Icon size={18} />
         </div>
-        <p className="text-sm text-neutral-500">{stat.label}</p>
+
+        <p className="text-sm text-neutral-500">
+          {stat.label}
+        </p>
       </div>
 
-      <h3 className="text-3xl font-bold text-neutral-900 dark:text-white">
-        {stat.prefix || ""}
+      <h3 className="text-3xl font-bold text-neutral-900 dark:text-white tabular-nums">
+        {stat.prefix}
         {count.toLocaleString()}
-        {stat.suffix || ""}
+        {stat.suffix}
       </h3>
     </motion.div>
   );
-}
+});
 
 export default function NosStatistiques() {
   const ref = useRef(null);
 
-  //  déclenchement scroll (UNE SEULE FOIS)
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.2,
+  });
 
   return (
-    <section ref={ref} className="py-24 px-6 ">
-      {/* HEADER */}
+    <section ref={ref} className="py-24 px-6">
       <div className="text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
           Nos statistiques
         </h2>
+
         <p className="text-neutral-500 mt-3">
           Plateforme de génération de cartes d’élèves en RDC
         </p>
       </div>
 
-      {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {stats.map((s, i) => (
-          <StatCard key={i} stat={s} trigger={isInView} />
+        {stats.map((stat) => (
+          <StatCard
+            key={stat.label}
+            stat={stat}
+            trigger={isInView}
+          />
         ))}
       </div>
     </section>

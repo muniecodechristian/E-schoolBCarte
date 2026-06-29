@@ -78,9 +78,9 @@ export default function HomeSection2() {
                     <Sparkles className="text-indigo-600" size={18} />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900 dark:text-white">
-                      Tableau de bord
-                    </p>
+                   
+                      <div className="w-8 h-8 rounded-full bg-slate-500" />
+                
                     <p className="text-xs text-slate-500">
                       Génération instantanée
                     </p>

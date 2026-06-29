@@ -1,17 +1,35 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { lazy, Suspense, useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Spotlight } from "@/components/ui/Spotlight";
-import { SplineScene } from "@/components/ui/SplineScene";
+const SplineScene = lazy(() =>
+  import("@/components/ui/SplineScene").then((module) => ({
+    default: module.SplineScene,
+  }))
+);
 
 export default function SplineSceneBasic() {
+
+const ref = useRef(null);
+
+const isInView = useInView(ref, {
+  once: true,
+  margin: "-150px",
+});
+
+const reduceMotion = useReducedMotion();
+
+
   return (
-    <section className="w-full relative overflow-hidden">
+ <section
+  ref={ref}
+  className="relative w-full overflow-hidden content-visibility-auto"
+>
 
       <Card className="relative w-full overflow-hidden rounded-none border-0 bg-gradient-to-b from-black via-zinc-950 to-black text-white">
 
@@ -25,9 +43,14 @@ export default function SplineSceneBasic() {
 
             {/* BADGE */}
             <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              animate={
+  reduceMotion
+    ? {}
+    : {
+        opacity: 1,
+        y: 0,
+      }
+}
               className="mb-6 inline-flex w-fit rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm backdrop-blur"
             >
               🇨🇩 Plateforme officielle de cartes d’élèves numériques
@@ -35,9 +58,14 @@ export default function SplineSceneBasic() {
 
             {/* TITLE */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              animate={
+  reduceMotion
+    ? {}
+    : {
+        opacity: 1,
+        y: 0,
+      }
+}
               className="max-w-xl text-5xl font-black leading-tight md:text-6xl"
             >
               Créez des{" "}
@@ -49,9 +77,14 @@ export default function SplineSceneBasic() {
 
             {/* DESCRIPTION */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              animate={
+  reduceMotion
+    ? {}
+    : {
+        opacity: 1,
+        y: 0,
+      }
+}
               className="mt-8 max-w-lg text-lg leading-8 text-zinc-300"
             >
               E-schoolb digitalise la gestion des cartes scolaires en République Démocratique du Congo.
@@ -93,13 +126,21 @@ export default function SplineSceneBasic() {
           </div>
 
           {/* ================= RIGHT ================= */}
-          <div className="relative h-[520px] md:h-[650px] lg:h-[600px] flex items-center justify-center">
+         <div className="relative flex items-center justify-center min-h-[420px] h-[55vh] max-h-[700px]">
 
             {/* Spline robot */}
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="h-full w-full scale-110 lg:scale-125 xl:scale-150"
-            />
+            {isInView && (
+  <Suspense
+    fallback={
+      <div className="h-full w-full animate-pulse rounded-3xl bg-zinc-900" />
+    }
+  >
+    <SplineScene
+      scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+      className="h-full w-full scale-95 lg:scale-105 xl:scale-115 will-change-transform"
+    />
+  </Suspense>
+)}
 
             {/* ================= FLOATING CARD (NEW PREMIUM) ================= */}
             <motion.div

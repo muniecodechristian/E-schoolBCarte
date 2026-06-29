@@ -129,9 +129,9 @@ function TestimonialsColumn({ testimonials, duration = 10, className = "" }) {
 
 // ---------------- SECTION ----------------
 function TestimonialsSection() {
-  const firstColumn = testimonials.slice(0, 3);
-  const secondColumn = testimonials.slice(3, 6);
-  const thirdColumn = testimonials.slice(6, 9);
+  const firstColumn = testimonials.slice(0, 1);
+  const secondColumn = testimonials.slice(2, 3);
+  const thirdColumn = testimonials.slice(4, 5);
 
   return (
   <section className="relative py-24 overflow-hidden">
